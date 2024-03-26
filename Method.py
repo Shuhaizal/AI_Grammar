@@ -1,3 +1,6 @@
+import os
+os.environ['JAVA_HOME'] = 'path_to_java_home_directory'
+
 import streamlit as st
 import language_tool_python
 
