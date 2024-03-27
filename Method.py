@@ -5,7 +5,7 @@ import streamlit as st
 import language_tool_python
 
 # Specify the path to the Java executable
-java_path = "C:\\Program Files\\Java\\jdk-11.0.17.8\\bin\\java"
+java_path = "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
 os.environ['JAVA_HOME'] = 'C:\\Program Files\\Java\\jdk-11.0.17.8'
 
 
