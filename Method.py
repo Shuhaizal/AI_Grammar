@@ -5,7 +5,7 @@ import streamlit as st
 import language_tool_python
 
 # Specify the path to the Java executable
-java_path = "C:\Users\Shuhaizal\Desktop\Github\AI_Grammar\java.exe"
+java_path = "C:\\Users\\Shuhaizal\\Desktop\\Github\\AI_Grammar\\java.exe"
 os.environ['JAVA_HOME'] = java_path
 
 import subprocess
