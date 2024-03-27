@@ -10,7 +10,7 @@ import streamlit as st
 import language_tool_python
 
 # Initialize LanguageTool
-tool = language_tool_python.LanguageTool('en-US', java_path=java_path)
+tool = language_tool_python.LanguageTool('en-US')
 
 # Function to perform grammar check
 def grammar_check(text):
