@@ -11,7 +11,7 @@ os.environ['JAVA_HOME'] = java_path
 import subprocess
 
 # Relative path to the Java executable within the repository
-java_executable_path = 'C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe'
+java_executable_path = 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath\\java.exe'
 
 # Command to run the Java executable
 command = ['java', '-jar', java_executable_path]
