@@ -8,6 +8,16 @@ import language_tool_python
 java_path = "C:\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
 os.environ['JAVA_HOME'] = 'C:\\Program Files\\Java\\jdk-11.0.17.8'
 
+import subprocess
+
+# Relative path to the Java executable within the repository
+java_executable_path = 'C:\Users\\Shuhaizal\\Desktop\\Github\\AI_Grammar\\java.exe'
+
+# Command to run the Java executable
+command = ['java', '-jar', java_executable_path]
+
+# Execute the Java executable using the relative path
+subprocess.run(command)
 
 # Initialize LanguageTool
 tool = language_tool_python.LanguageTool('en-US', java_path=java_path)
