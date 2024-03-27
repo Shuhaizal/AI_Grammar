@@ -1,11 +1,16 @@
-import os
-os.environ['JAVA_HOME'] = 'C:\\Program Files\\Java\\jdk-11.0.17.8'
+#import os
+#os.environ['JAVA_HOME'] = 'C:\\Program Files\\Java\\jdk-11.0.17.8'
+
+import language_tool_python
+
+# Specify the path to the Java executable
+java_path = "C:\\Program Files\\Java\\jdk-11.0.17.8"
 
 import streamlit as st
 import language_tool_python
 
 # Initialize LanguageTool
-tool = language_tool_python.LanguageTool('en-US')
+tool = language_tool_python.LanguageTool('en-US', java_path=java_path)
 
 # Function to perform grammar check
 def grammar_check(text):
