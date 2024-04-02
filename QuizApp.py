@@ -27,7 +27,7 @@ def generate_question(math_quiz, question_num):
         num1, num2 = answer, num2  # Swap to get the original numbers
 
     st.write(f"\nQuestion {question_num}: {num1} {operator} {num2}")
-    user_answer = st.text_input("Your Answer:", key=f'user_answer_{question_num}')
+    user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{question_num}')
 
     if user_answer.strip() == str(answer):
         st.write("Correct!")
@@ -60,7 +60,7 @@ def main():
 
         take_quiz(math_quiz)
 
-        another_action = st.sidebar.radio("Do you want to take another quiz?", ('Yes', 'No'), key='another_action_radio')
+        another_action = st.sidebar.radio("Do you want to take another quiz?", ('Yes', 'No'), key=f'another_action_{operation}')
 
         if another_action == 'No':
             st.write("Thank you for playing the Math Quiz Game!")
