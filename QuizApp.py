@@ -7,7 +7,7 @@ class MathQuiz:
         self.num_questions = num_questions
         self.score = score
 
-def generate_question(math_quiz):
+def generate_question(math_quiz, question_num):
     num1 = random.randint(1, 10)
     num2 = random.randint(1, 10)
 
@@ -26,8 +26,8 @@ def generate_question(math_quiz):
         operator = '/'
         num1, num2 = answer, num2  # Swap to get the original numbers
 
-    st.write(f"\nQuestion: {num1} {operator} {num2}")
-    user_answer = st.text_input("Your Answer:", key=f'user_answer_{num1}_{num2}')
+    st.write(f"\nQuestion {question_num}: {num1} {operator} {num2}")
+    user_answer = st.text_input("Your Answer:", key=f'user_answer_{question_num}')
 
     if user_answer.strip() == str(answer):
         st.write("Correct!")
@@ -36,8 +36,8 @@ def generate_question(math_quiz):
         st.write(f"Wrong! The correct answer is: {answer}")
 
 def take_quiz(math_quiz):
-    for _ in range(math_quiz.num_questions):
-        generate_question(math_quiz)
+    for i in range(math_quiz.num_questions):
+        generate_question(math_quiz, i + 1)
 
     st.write(f"\nQuiz Complete! Your Score: {math_quiz.score}/{math_quiz.num_questions}")
 
