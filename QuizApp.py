@@ -26,14 +26,16 @@ def generate_question(math_quiz, question_num):
         operator = '/'
         num1, num2 = answer, num2  # Swap to get the original numbers
 
-    st.write(f"\nQuestion {question_num}: {num1} {operator} {num2}")
-    user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{question_num}')
+    with st.expander(f"Question {question_num}"):
+        st.write(f"{num1} {operator} {num2}")
+        user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{question_num}')
 
-    if user_answer.strip() == str(answer):
-        st.write("Correct!")
-        math_quiz.score += 1
-    else:
-        st.write(f"Wrong! The correct answer is: {answer}")
+        if user_answer.strip():
+            if user_answer.strip() == str(answer):
+                st.write("Correct!")
+                math_quiz.score += 1
+            else:
+                st.write(f"Wrong! The correct answer is: {answer}")
 
 def take_quiz(math_quiz):
     for i in range(math_quiz.num_questions):
@@ -65,6 +67,8 @@ def main():
         if another_action == 'No':
             st.write("Thank you for playing the Math Quiz Game!")
             break
+        else:
+            st.write("---")
 
 if __name__ == "__main__":
     main()
