@@ -46,7 +46,7 @@ def take_quiz(math_quiz):
 def main():
     st.title("Math Quiz Game")
     while True:
-        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key='operation_selectbox')
+        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key=f'operation_selectbox_{random.randint(1, 1000)}')
 
         if choice == 'Addition':
             operation = '1'
