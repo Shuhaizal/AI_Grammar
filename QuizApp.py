@@ -25,7 +25,10 @@ def generate_question(math_quiz):
                 answer = num1 * num2
                 operator = '*'
             elif math_quiz.operation == '4':  # Division
-                answer = num1 * num2  # Ensure a whole number division
+                while num1 % num2 != 0:  # Ensure a whole number division
+                    num1 = random.randint(1, 10)
+                    num2 = random.randint(1, 10)
+                answer = num1 // num2
                 operator = '/'
                 num1, num2 = answer, num2  # Swap to get the original numbers
 
@@ -50,7 +53,7 @@ def take_quiz(math_quiz):
 
 def main():
     st.title("Math Quiz Game")
-    choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key='operation_selectbox')
+    choice = st.sidebar.radio("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], index=0)
 
     if choice == 'Addition':
         operation = '1'
