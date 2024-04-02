@@ -6,29 +6,38 @@ class MathQuiz:
         self.operation = operation
         self.num_questions = num_questions
         self.score = score
+        self.questions = []
 
-def generate_question(math_quiz, question_num):
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
+def generate_question(math_quiz):
+    if not math_quiz.questions:
+        for _ in range(math_quiz.num_questions):
+            num1 = random.randint(1, 10)
+            num2 = random.randint(1, 10)
 
-    if math_quiz.operation == '1':  # Addition
-        answer = num1 + num2
-        operator = '+'
-    elif math_quiz.operation == '2':  # Subtraction
-        num1, num2 = max(num1, num2), min(num1, num2)  # Ensure a positive result
-        answer = num1 - num2
-        operator = '-'
-    elif math_quiz.operation == '3':  # Multiplication
-        answer = num1 * num2
-        operator = '*'
-    elif math_quiz.operation == '4':  # Division
-        answer = num1 * num2  # Ensure a whole number division
-        operator = '/'
-        num1, num2 = answer, num2  # Swap to get the original numbers
+            if math_quiz.operation == '1':  # Addition
+                answer = num1 + num2
+                operator = '+'
+            elif math_quiz.operation == '2':  # Subtraction
+                num1, num2 = max(num1, num2), min(num1, num2)  # Ensure a positive result
+                answer = num1 - num2
+                operator = '-'
+            elif math_quiz.operation == '3':  # Multiplication
+                answer = num1 * num2
+                operator = '*'
+            elif math_quiz.operation == '4':  # Division
+                answer = num1 * num2  # Ensure a whole number division
+                operator = '/'
+                num1, num2 = answer, num2  # Swap to get the original numbers
 
-    with st.expander(f"Question {question_num}"):
-        st.write(f"{num1} {operator} {num2}")
-        user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{question_num}')
+            math_quiz.questions.append((num1, num2, operator, answer))
+
+@st.cache(suppress_st_warning=True)
+def take_quiz(math_quiz):
+    math_quiz.score = 0
+    generate_question(math_quiz)
+    for i, (num1, num2, operator, answer) in enumerate(math_quiz.questions, 1):
+        st.write(f"\nQuestion {i}: {num1} {operator} {num2}")
+        user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{i}')
 
         if user_answer.strip():
             if user_answer.strip() == str(answer):
@@ -37,17 +46,12 @@ def generate_question(math_quiz, question_num):
             else:
                 st.write(f"Wrong! The correct answer is: {answer}")
 
-def take_quiz(math_quiz):
-    for i in range(math_quiz.num_questions):
-        generate_question(math_quiz, i + 1)
-
     st.write(f"\nQuiz Complete! Your Score: {math_quiz.score}/{math_quiz.num_questions}")
 
 def main():
     st.title("Math Quiz Game")
     while True:
-        unique_key = random.randint(1, 1000)  # Generate a unique key
-        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key=f'operation_selectbox_{unique_key}')
+        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key=f'operation_selectbox_{random.randint(1, 1000)}')
 
         if choice == 'Addition':
             operation = '1'
@@ -62,14 +66,7 @@ def main():
         math_quiz = MathQuiz(operation, num_questions)
 
         take_quiz(math_quiz)
-
-        another_action = st.sidebar.radio("Do you want to take another quiz?", ('Yes', 'No'), key=f'another_action_{operation}')
-
-        if another_action == 'No':
-            st.write("Thank you for playing the Math Quiz Game!")
-            break
-        else:
-            st.write("---")
+        break
 
 if __name__ == "__main__":
     main()
