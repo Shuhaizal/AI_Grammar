@@ -27,7 +27,7 @@ def generate_question(math_quiz):
         num1, num2 = answer, num2  # Swap to get the original numbers
 
     st.write(f"\nQuestion: {num1} {operator} {num2}")
-    user_answer = st.text_input("Your Answer:")
+    user_answer = st.text_input("Your Answer:", key=f'user_answer_{num1}_{num2}')
 
     if user_answer.strip() == str(answer):
         st.write("Correct!")
@@ -44,7 +44,7 @@ def take_quiz(math_quiz):
 def main():
     st.title("Math Quiz Game")
     while True:
-        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'])
+        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key='operation_selectbox')
 
         if choice == 'Addition':
             operation = '1'
@@ -60,7 +60,7 @@ def main():
 
         take_quiz(math_quiz)
 
-        another_action = st.sidebar.radio("Do you want to take another quiz?", ('Yes', 'No'))
+        another_action = st.sidebar.radio("Do you want to take another quiz?", ('Yes', 'No'), key='another_action_radio')
 
         if another_action == 'No':
             st.write("Thank you for playing the Math Quiz Game!")
