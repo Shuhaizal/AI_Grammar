@@ -37,7 +37,7 @@ def take_quiz(math_quiz):
     generate_question(math_quiz)
     for i, (num1, num2, operator, answer) in enumerate(math_quiz.questions, 1):
         st.write(f"\nQuestion {i}: {num1} {operator} {num2}")
-        user_answer = st.text_input("Your Answer:", key=f'user_answer_{math_quiz.operation}_{i}')
+        user_answer = st.text_input(f"Your Answer for Question {i}:", key=f'user_answer_{math_quiz.operation}_{i}')
 
         if user_answer.strip():
             if user_answer.strip() == str(answer):
@@ -50,23 +50,21 @@ def take_quiz(math_quiz):
 
 def main():
     st.title("Math Quiz Game")
-    while True:
-        choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key=f'operation_selectbox_{random.randint(1, 1000)}')
+    choice = st.sidebar.selectbox("Select Operation", ['Addition', 'Subtraction', 'Multiplication', 'Division'], key='operation_selectbox')
 
-        if choice == 'Addition':
-            operation = '1'
-        elif choice == 'Subtraction':
-            operation = '2'
-        elif choice == 'Multiplication':
-            operation = '3'
-        elif choice == 'Division':
-            operation = '4'
+    if choice == 'Addition':
+        operation = '1'
+    elif choice == 'Subtraction':
+        operation = '2'
+    elif choice == 'Multiplication':
+        operation = '3'
+    elif choice == 'Division':
+        operation = '4'
 
-        num_questions = st.sidebar.number_input("Enter the number of questions for the quiz:", min_value=1, value=5)
-        math_quiz = MathQuiz(operation, num_questions)
+    num_questions = st.sidebar.number_input("Enter the number of questions for the quiz:", min_value=1, value=5)
+    math_quiz = MathQuiz(operation, num_questions)
 
-        take_quiz(math_quiz)
-        break
+    take_quiz(math_quiz)
 
 if __name__ == "__main__":
     main()
